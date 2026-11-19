@@ -67,4 +67,4 @@ fi
 docker compose down
 ```
 
-[교차 검증 결과 이슈 작성](https://github.com/wjsworud1025/linux-study-week4-lab/issues/new?template=cross-check.md)을 열어 체크리스트, 전후 ID와 번호, README만으로 완료했는지를 기록합니다. 막혔다면 마지막 성공 단계와 오류를 남겨 주세요. 결과 이슈 주소를 개인 실습 기록에 첨부합니다. [4주차 가이드](https://wjsworud1025.github.io/linux-study/guides/week-4/)
+[교차 검증 결과 이슈 작성](https://github.com/wjsworud1025/linux-study-week4-lab/issues/new?template=cross-check.yml)을 열어 체크리스트, 전후 ID와 번호, README만으로 완료했는지를 기록합니다. 막혔다면 마지막 성공 단계와 오류를 남겨 주세요. 결과 이슈 주소를 개인 실습 기록에 첨부합니다. [4주차 가이드](https://wjsworud1025.github.io/linux-study/guides/week-4/)

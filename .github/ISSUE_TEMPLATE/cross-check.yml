@@ -1,0 +1,54 @@
+name: 팀원 교차 검증 결과
+description: README로 실행한 결과와 방문 기록 보존 여부를 제출합니다.
+title: "[4주차 교차 검증] "
+labels: ["week4-cross-check"]
+body:
+  - type: dropdown
+    id: verdict
+    attributes:
+      label: 판정
+      description: 직접 확인한 완료 기준에 따라 하나를 선택하세요.
+      multiple: false
+      options:
+        - 성공
+        - 일부 성공
+        - 실패
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: 검증 환경
+      placeholder: "검증 날짜 · 운영체제 · 커밋 · Docker 및 Compose 버전"
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: 완료한 단계
+      options:
+        - label: 새 환경에 저장소를 복제하고 README로 서비스를 기동했다.
+        - label: DB가 healthy이고 소개 페이지에 방문 번호가 표시됐다.
+        - label: 웹 로그에서 해당 요청의 HTTP 200을 확인했다.
+        - label: 재기동 후 DB 컨테이너 ID가 바뀌었다.
+        - label: /visits에서 재기동 전 방문 번호를 확인했다.
+        - label: 결과를 기록한 뒤 서비스를 종료했다.
+  - type: textarea
+    id: evidence
+    attributes:
+      label: 관찰값
+      placeholder: |
+        DB 상태와 웹 응답:
+        요청 로그 한 줄:
+        컨테이너 ID (교체 전 → 후):
+        방문 번호 (교체 전 → 후):
+  - type: dropdown
+    id: assistance
+    attributes:
+      label: 독립 실행 여부
+      options:
+        - README만 사용
+        - 추가 도움 사용
+  - type: textarea
+    id: feedback
+    attributes:
+      label: 막힌 단계와 개선 의견
+      description: 마지막으로 성공한 단계와 오류를 적어 주세요. 암호와 .env 내용은 제외하세요.
