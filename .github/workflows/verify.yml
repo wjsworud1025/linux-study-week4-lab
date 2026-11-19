@@ -1,0 +1,18 @@
+name: Verify README exercise
+on: [push, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  exercise:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run the README exercise in one shell
+        shell: python
+        run: |
+          import pathlib, re, subprocess
+          text = pathlib.Path("README.md").read_text()
+          blocks = re.findall(r"```bash\n(.*?)\n```", text, re.S)
+          assert len(blocks) == 5
+          subprocess.run(["bash", "-euo", "pipefail", "-c", "\n".join(blocks[1:])], check=True)
