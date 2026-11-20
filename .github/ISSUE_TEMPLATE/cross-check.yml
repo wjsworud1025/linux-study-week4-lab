@@ -1,6 +1,6 @@
 name: 팀원 교차 검증 결과
 description: 짝의 저장소와 README로 검증한 실행 결과를 제출합니다.
-title: "[4주차 교차 검증] "
+title: "[8주차 교차 검증] "
 labels: ["week4-cross-check"]
 body:
   - type: dropdown

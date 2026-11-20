@@ -1,4 +1,4 @@
-# 4주차 교차 검증 · 방문 기록이 남는 웹 서비스
+# 8주차 교차 검증 · 방문 기록이 남는 웹 서비스
 
 **공용 리허설** — 이 저장소에서 소개 페이지에 방문 기록을 한 건 쓰고, DB 컨테이너를 교체한 뒤 같은 번호를 읽습니다. 아래 명령은 같은 Bash 터미널에서 순서대로 실행하세요. 이미지 다운로드를 포함해 약 15~30분 걸립니다.
 
@@ -72,4 +72,4 @@ fi
 docker compose down
 ```
 
-짝의 저장소를 검증했으면 [교차 검증 결과 이슈 작성](https://github.com/wjsworud1025/linux-study-week4-lab/issues/new?template=cross-check.yml)을 엽니다. 검증한 URL·커밋, 환경, README만 사용했는지와 관찰값을 기록합니다. 막혔다면 마지막 성공 단계와 오류를 기록합니다. 결과 이슈 주소를 개인 실습 글에 첨부합니다. [4주차 가이드](https://wjsworud1025.github.io/linux-study/guides/week-4/)
+짝의 저장소를 검증했으면 [교차 검증 결과 이슈 작성](https://github.com/wjsworud1025/linux-study-week4-lab/issues/new?template=cross-check.yml)을 엽니다. 검증한 URL·커밋, 환경, README만 사용했는지와 관찰값을 기록합니다. 막혔다면 마지막 성공 단계와 오류를 기록합니다. 결과 이슈 주소를 개인 실습 글에 첨부합니다. [8주차 가이드](https://wjsworud1025.github.io/linux-study/guides/week-8/)
