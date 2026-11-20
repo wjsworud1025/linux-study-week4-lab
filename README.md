@@ -1,16 +1,21 @@
 # 4주차 교차 검증 · 방문 기록이 남는 웹 서비스
 
-다른 팀원이 처음 복제한 Ubuntu VM에서 **소개 페이지에 방문 기록을 한 건 쓰고 → DB 컨테이너를 교체하고 → 같은 번호를 다시 읽는** 실습입니다. 아래 명령은 같은 Bash 터미널에서 순서대로 실행하세요. 소요 시간은 이미지 다운로드 시간을 포함해 약 15~30분입니다.
+**공용 리허설** — 이 저장소에서 소개 페이지에 방문 기록을 한 건 쓰고, DB 컨테이너를 교체한 뒤 같은 번호를 읽습니다. 아래 명령은 같은 Bash 터미널에서 순서대로 실행하세요. 이미지 다운로드를 포함해 약 15~30분 걸립니다.
+
+**최종 교차 검증** — 서로 앱 저장소 URL과 검증할 커밋 SHA를 교환합니다. 검증자는 짝의 저장소를 복제한 뒤 `git switch --detach 전달받은_SHA`로 전환하고 `git rev-parse HEAD`로 SHA를 확인합니다. 이후 **그 커밋의 README만** 따라 실행합니다. 아래 공용 절차는 각자 README를 작성할 때 참고하세요. 결과 제출에는 대상 URL·커밋, 실행 환경, 독립 실행 여부와 관찰값이 필요합니다.
 
 ## 1. 준비와 복제
 
-Git, curl, OpenSSL, Docker Engine과 Compose v2가 필요합니다. `docker version`에 Server가 나오고 `docker compose version`이 성공하는지 확인하세요. VM 터미널에서 `ss -ltn 'sport = :8080'`을 실행해 8080에 대기 중인 서비스가 없는지 봅니다. 포트가 사용 중이면 해당 실습 서비스를 종료하거나 새 VM을 사용합니다.
+Git, curl, OpenSSL, Docker Engine과 Compose v2가 필요합니다. `docker version`에 Server가 나오고 `docker compose version`이 성공하는지 확인하세요. VM에서 Docker 실행에 관리자 권한이 필요하면 아래 Docker 명령에 `sudo`를 붙입니다. VM 터미널에서 `ss -ltn 'sport = :8080'`을 실행해 8080에 대기 중인 서비스가 없는지 봅니다. 포트가 사용 중이면 해당 실습 서비스를 종료하거나 새 VM을 사용합니다.
 
 ```bash
-git clone https://github.com/wjsworud1025/linux-study-week4-lab.git
-cd linux-study-week4-lab
-git rev-parse --short HEAD
+lab_dir="week4-lab-$(openssl rand -hex 6)"
+git clone https://github.com/wjsworud1025/linux-study-week4-lab.git "$lab_dir"
+cd "$lab_dir"
+git rev-parse HEAD
 ```
+
+공용 랩에서 Compose 프로젝트 이름을 따로 지정하지 않았다면 복제 폴더의 임의 이름으로 프로젝트와 DB 볼륨이 구분됩니다. 짝의 저장소를 검증할 때는 README 지침에 따라 회차별 고유 이름을 `-p 이름`으로 지정하고, 종료·재기동까지 모든 Compose 명령에 같은 이름을 사용합니다.
 
 ## 2. 로컬 암호를 준비하고 시작하기
 
@@ -39,7 +44,7 @@ printf '방문 번호: %s\nDB 교체 전: %.12s\n' "$visit" "$db_before"
 docker compose logs --tail 20 web | grep 'GET / HTTP'
 ```
 
-방문 번호와 DB ID가 모두 표시되고 웹 로그에 200이 찍혔는지 확인하세요. 이 값을 결과 이슈에 기록합니다.
+방문 번호와 DB ID가 모두 표시되고 웹 로그에 200이 찍혔는지 확인하세요. 최종 교차 검증에서는 짝의 README로 확인한 값을 결과 이슈에 기록합니다.
 
 ## 4. 새 DB 컨테이너에서 기존 번호 조회하기
 
@@ -61,10 +66,10 @@ fi
 
 `/visits`는 기록을 추가하지 않는 조회 경로입니다. 두 ID가 다르고, 저장해 둔 번호가 조회 결과에 한 줄로 나오면 통과입니다.
 
-## 5. 종료하고 팀에 결과 공유하기
+## 5. 종료하고 최종 검증 결과 공유하기
 
 ```bash
 docker compose down
 ```
 
-[교차 검증 결과 이슈 작성](https://github.com/wjsworud1025/linux-study-week4-lab/issues/new?template=cross-check.yml)을 열어 체크리스트, 전후 ID와 번호, README만으로 완료했는지를 기록합니다. 막혔다면 마지막 성공 단계와 오류를 남겨 주세요. 결과 이슈 주소를 개인 실습 기록에 첨부합니다. [4주차 가이드](https://wjsworud1025.github.io/linux-study/guides/week-4/)
+짝의 저장소를 검증했으면 [교차 검증 결과 이슈 작성](https://github.com/wjsworud1025/linux-study-week4-lab/issues/new?template=cross-check.yml)을 엽니다. 검증한 URL·커밋, 환경, README만 사용했는지와 관찰값을 기록합니다. 막혔다면 마지막 성공 단계와 오류를 기록합니다. 결과 이슈 주소를 개인 실습 글에 첨부합니다. [4주차 가이드](https://wjsworud1025.github.io/linux-study/guides/week-4/)
